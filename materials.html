@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js Materials Demo</title>
+
+    <style>
+        body{
+            margin:0;
+            overflow:hidden;
+            background:black;
+            color:white;
+            font-family:Arial, sans-serif;
+        }
+
+        canvas {
+            display:block;
+            position:fixed;
+            inset:0;
+            width:100vw;
+            height:100vh;
+            z-index:0;
+        }
+
+        #instructions{
+            position:absolute;
+            top:10px;
+            left:10px;
+            background:rgba(0,0,0,.8);
+            padding:15px;
+            border-radius:10px;
+            z-index:10;
+            line-height:1.5;
+            pointer-events:none;
+        }
+
+        h2{
+            margin-top:0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="instructions">
+    <h2>Three.js Materials Demo</h2>
+
+    <b>Keyboard Controls</b><br><br>
+
+    1 = White Light<br>
+    2 = Red Light<br>
+    3 = Blue Light<br>
+    Left/Right Arrow = Move Light Left/Right<br>
+    Up/Down Arrow = Move Light Up/Down<br>
+    R = Toggle Rotation<br>
+
+    <hr>
+
+    <b>Materials</b><br>
+
+    Sphere #1 = Basic<br>
+    Sphere #2 = Lambert<br>
+    Sphere #3 = Phong<br>
+    Sphere #4 = Standard<br>
+    Sphere #5 = Physical<br>
+    Sphere #6 = Rubber<br>
+    Sphere #7 = Gold<br>
+
+    <hr>
+
+    Watch how each material reacts differently
+    to the same light source.
+</div>
+
+<script type="module" src="./materials.js"></script>
+
+</body>
+</html>

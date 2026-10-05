@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three.js Specialty Materials Demo</title>
+
+<style>
+body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+canvas {
+    display:block;
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    z-index:0;
+}
+
+#instructions{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:rgba(0,0,0,.8);
+    padding:12px;
+    border-radius:8px;
+    line-height:1.6;
+    z-index:10;
+    pointer-events:none;
+}
+
+h2{
+    margin-top:0;
+}
+</style>
+</head>
+<body>
+
+<div id="instructions">
+<h2>Specialty Materials Demo</h2>
+
+<b>1</b> Toggle White Light<br>
+<b>2</b> Toggle Red Light<br>
+<b>3</b> Toggle Blue Light<br>
+<b>R</b> Rotate Objects<br>
+<b>Arrow Keys</b> Move Point Light<br>
+
+<hr>
+
+Left Sphere = Toon<br>
+Second Sphere = Normal<br>
+Third Sphere = Matcap<br>
+Right Sphere = Transparent
+</div>
+
+<script type="module" src="./materials-special.js"></script>
+
+</body>
+</html>

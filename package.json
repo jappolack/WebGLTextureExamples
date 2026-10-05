@@ -1,0 +1,24 @@
+{
+  "name": "webgltextureexamples",
+  "version": "1.0.0",
+  "description": "This project contains a small set of browser-based Three.js demos that explore how different material types react to lighting and environment conditions in WebGL.",
+  "main": "enviromental.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jappolack/WebGLTextureExamples.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jappolack/WebGLTextureExamples/issues"
+  },
+  "homepage": "https://github.com/jappolack/WebGLTextureExamples#readme",
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}
