@@ -27,6 +27,9 @@ Then open these URLs in your browser:
 
 ### Materials demo
 
+- Seven distinct finishes: pink Basic, green Lambert, blue glossy Phong, orange Standard, cyan faceted Physical crystal, textured red rubber, and polished gold.
+- The movable point light supports white, red, and blue modes. Fixed accent spotlights highlight the crystal and gold spheres.
+- `studio.hdr` provides environment reflections for the PBR materials.
 - 1 = White light
 - 2 = Red light
 - 3 = Blue light

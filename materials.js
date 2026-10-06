@@ -1,4 +1,5 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.168/build/three.module.js';
+import { RGBELoader } from 'https://cdn.jsdelivr.net/npm/three@0.168.0/examples/jsm/loaders/RGBELoader.js/+esm';
 
 
 // ----------------------------------------------------
@@ -42,6 +43,9 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 document.body.appendChild(renderer.domElement);
 
+const pmremGenerator = new THREE.PMREMGenerator(renderer);
+pmremGenerator.compileEquirectangularShader();
+
 
 // ----------------------------------------------------
 // Lights
@@ -66,6 +70,24 @@ pointLight.shadow.mapSize.set(1024, 1024);
 pointLight.shadow.bias = -0.0001;
 
 scene.add(pointLight);
+
+const goldSpotlight = new THREE.SpotLight(0xfff4d6, 180, 20, Math.PI / 5, 0.65);
+goldSpotlight.position.set(9, 5, 6);
+goldSpotlight.target.position.set(9, 0, 0);
+goldSpotlight.castShadow = true;
+goldSpotlight.shadow.mapSize.set(1024, 1024);
+scene.add(goldSpotlight, goldSpotlight.target);
+
+const crystalSpotlight = new THREE.SpotLight(0x8feaff, 220, 18, Math.PI / 5, 0.7);
+crystalSpotlight.position.set(3, 5, 5);
+crystalSpotlight.target.position.set(3, 0, 0);
+crystalSpotlight.castShadow = true;
+crystalSpotlight.shadow.mapSize.set(1024, 1024);
+scene.add(crystalSpotlight, crystalSpotlight.target);
+
+const crystalFillLight = new THREE.PointLight(0x286bff, 55, 12);
+crystalFillLight.position.set(0, 1, 4);
+scene.add(crystalFillLight);
 
 
 // Light marker
@@ -122,47 +144,59 @@ const geometry =
 
 const basicMat =
     new THREE.MeshBasicMaterial({
-        color: 0x00ff00
+        color: 0xff28a5
     });
 
 // Lambert
 
 const lambertMat =
     new THREE.MeshLambertMaterial({
-        color: 0x00ff00
+        color: 0x40dd68
     });
 
 // Phong
 
 const phongMat =
     new THREE.MeshPhongMaterial({
-        color: 0x00ff00,
-        shininess: 100
+        color: 0x2675ff,
+        specular: 0xffffff,
+        shininess: 150
     });
 
 // Standard
 
 const standardMat =
     new THREE.MeshStandardMaterial({
-        color: 0x00ff00,
-        roughness: 0.4,
-        metalness: 0.5
+        color: 0xff7138,
+        roughness: 0.28,
+        metalness: 0.25
     });
 
 // Physical
 
 const physicalMat =
     new THREE.MeshPhysicalMaterial({
-        color: 0x40ff80,
-        roughness: 0.18,
-        metalness: 0.85,
+        color: 0x18c8ff,
+        roughness: 0.08,
+        metalness: 0,
+        flatShading: true,
         clearcoat: 1,
-        clearcoatRoughness: 0.04,
-        sheen: 1,
-        sheenColor: new THREE.Color(0x80ffb0),
-        envMapIntensity: 2.5,
-        reflectivity: 1
+        clearcoatRoughness: 0.02,
+        transmission: 0.35,
+        thickness: 1.3,
+        ior: 2.2,
+        attenuationColor: new THREE.Color(0x028cff),
+        attenuationDistance: 1.8,
+        emissive: 0x001b50,
+        emissiveIntensity: 0.5,
+        envMapIntensity: 1.5
     });
+
+new RGBELoader().load('./studio.hdr', (texture) => {
+    scene.environment = pmremGenerator.fromEquirectangular(texture).texture;
+    texture.dispose();
+    pmremGenerator.dispose();
+});
 
 // Rubber
 
@@ -194,10 +228,10 @@ const rubberTexture = (() => {
 
 const rubberMat =
     new THREE.MeshStandardMaterial({
-        color: 0xf2f2f2,
-        roughness: 0.9,
-        metalness: 0.08,
-        emissive: 0x1a1a1a,
+        color: 0xeb222d,
+        roughness: 0.92,
+        metalness: 0,
+        emissive: 0x250000,
         map: rubberTexture,
         envMapIntensity: 0.2
     });
@@ -207,8 +241,8 @@ const rubberMat =
 const goldMat =
     new THREE.MeshPhysicalMaterial({
         color: 0xd9a441,
-        metalness: 0.9,
-        roughness: 0.42,
+        metalness: 1,
+        roughness: 0.26,
         clearcoat: 0.7,
         clearcoatRoughness: 0.15,
         envMapIntensity: 1.8,
@@ -245,6 +279,7 @@ const lambertSphere = materialSpheres[1].mesh;
 const phongSphere = materialSpheres[2].mesh;
 const standardSphere = materialSpheres[3].mesh;
 const physicalSphere = materialSpheres[4].mesh;
+physicalSphere.geometry = new THREE.IcosahedronGeometry(1, 0);
 const rubberSphere = materialSpheres[5].mesh;
 const goldSphere = materialSpheres[6].mesh;
 
